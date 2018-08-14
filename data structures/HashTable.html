@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<script src="../jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+		
+			var myHashTable = new HashTable();
+			
+			function addKeyValue() {
+				var key = $("#key").val();
+				var value = $("#value").val();
+				myHashTable.add(key, value);
+			}
+			
+			function showValueForKey() {
+				var key = $("#keySearch").val();
+				console.log(myHashTable.get(key));
+			}		
+			
+            function HashTable (){
+				var arraySize = 10;
+				var array = new Array(arraySize)
+				this.array = array;
+				
+				function getListForKey(key){					
+					var list = array[getIndex(key)];
+					return list;					
+				}
+				
+				function getIndex(key){
+					var hashCode = key.toString().hashCode();
+					return hashCode % arraySize;
+				}
+				
+				HashTable.prototype.add = function(key, value){
+					var list = getListForKey(key);
+					
+					if(list){
+						list[key] = value;				
+					}
+					else{
+						var newList = {};
+						newList[key] = value;
+						this.array[getIndex(key)] = newList
+					}
+				}
+
+				HashTable.prototype.get = function(key){			
+					var list = getListForKey(key);
+					if(list){
+						return list[key];				
+					}
+					else{
+						throw "invalid key";
+					}
+				}
+			}
+
+			String.prototype.hashCode = function() {
+			  var hash = 0, i, chr;
+			  if (this.length === 0) return hash;
+			  for (i = 0; i < this.length; i++) {
+				chr   = this.charCodeAt(i);
+				hash  = ((hash << 5) - hash) + chr;
+				hash |= 0; // Convert to 32bit integer
+			  }
+			  return hash;
+			};
+		</script>
+	
+	</head>
+	<body>
+		Key
+		<input type="text" id="key"/>
+		Value
+		<input type="text" id="value"/>
+	    <input type="button" onclick="addKeyValue()" value="add key value" />
+		<br/>
+		Search For Value by Key
+		<input type="text" id="keySearch"/>		
+		<input type="button" onclick="showValueForKey()" value="show" />		
+	</body>
+</html>

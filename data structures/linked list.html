@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<script src="../jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+		
+			var myList = new List();
+			
+			function addElement() {
+				var element = $("#element").val();
+				var node = new Node(element);
+				myList.add(node);			
+			}
+			
+			function showList() {
+				for(var i = 0; i < myList.size ; i++){				
+					console.log(i + ": " + myList.get(i))				
+				}					
+			}
+		
+            function List (){
+				this.first = undefined;
+				this.last = undefined;
+				this.size = 0;
+			}
+
+			List.prototype.add = function(value){
+
+				var node = new Node(value);
+				
+				if(this.first) {
+					this.last.setNext(node);
+					this.last = node;
+				}
+				else{
+					this.first = node;
+					this.last = node;		
+				}
+				
+				this.size = this.size + 1;
+			}
+
+			List.prototype.get = function(ithElement){
+
+				var result = this.first;
+				var i = 0;
+				while(i<ithElement && result != undefined){
+					result = result.next;	
+					i++;
+				}
+				if(result == undefined){
+					alert("there is no " + ithElement + "th element")
+				}
+				else{
+					return result.getValue();
+				}				
+			}
+			
+			function Node(value){
+				this.value = value;
+				this.next = undefined;
+			}
+
+			Node.prototype.setNext = function(nextNode){
+				this.next = nextNode;
+			}
+			
+			Node.prototype.getValue = function(){
+				return this.value.value;
+			}
+			
+		</script>
+	
+	</head>
+	<body>
+		<input type="text" id="element"/>
+	    <input type="button" onclick="addElement()" value="add" />		
+		<input type="button" onclick="showList()" value="show" />		
+	</body>
+</html>

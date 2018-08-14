@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<script src="../jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+            function isUnique(){
+				var word = $("#word").val();
+				for(var i = 0; i<word.length; i++){
+					for(var j = i+1; j < word.length; j++){					
+						if (word[i]==word[j]){
+							alert("hay caracteres repetidos")
+							return
+						}
+					} 				
+				}
+				alert("no hay caracteres repetidos")			
+            }         
+		</script>
+	
+	</head>
+	<body>
+		<input type="text" id="word"/>
+	    <input type="button" onclick="isUnique()" value="is unique" />
+	</body>
+</html>

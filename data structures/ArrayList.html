@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<script src="../jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+		
+			var myList = new ArrayList();
+			
+			function addElement() {
+				var element = $("#element").val();
+				myList.add(element);
+			}
+			
+			function showList() {
+				for(var i = 0; i < myList.size ; i++){				
+					console.log(i + ": " + myList.get(i))				
+				}					
+			}
+		
+            function ArrayList (){
+				this.array = new Array(2);
+				this.size = 0;
+			}
+
+			ArrayList.prototype.add = function(value){
+				var length = this.array.length;
+				if(length == this.size){
+					//copy array
+					var doubleSizeArray = new Array(length*2);
+					for(var i = 0; i<length; i++){
+						doubleSizeArray[i] = this.array[i];
+					}
+					this.array = doubleSizeArray;
+				}
+				this.array[this.size] = value;
+				this.size = this.size + 1;				
+			}
+
+			ArrayList.prototype.get = function(ithElement){			
+				if(ithElement >= this.size) {				
+					throw "out of range";
+				}
+				else{
+					return this.array[ithElement];
+				}				
+			}			
+			
+		</script>
+	
+	</head>
+	<body>
+		<input type="text" id="element"/>
+	    <input type="button" onclick="addElement()" value="add" />		
+		<input type="button" onclick="showList()" value="show" />		
+	</body>
+</html>

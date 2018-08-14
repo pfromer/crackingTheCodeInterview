@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<script src="../jquery-3.3.1.min.js"></script>
+		<script src="../data structures/string builder.js"></script>
+		<script type="text/javascript">
+            function urlify(){
+				var string = trim($("#string").val());
+				
+				var stringBuilder = new StringBuilder();
+				
+				for(var i = 0; i<string.length; i++){
+					if(string[i] == " "){
+						stringBuilder.append("%20");					
+					}
+					else{
+						stringBuilder.append(string[i]);		
+					}	
+				}
+				
+				var result = stringBuilder.toString();
+				console.log(result);
+				return result;				
+			}	
+			
+			function trim(string){
+			
+				var frontSpaces = 0;
+				var endSpaces = 0;				
+				var i = 0;
+				
+				while(string[i] == " " && i<string.length){
+					i++;
+					frontSpaces++;
+				}
+			
+				i = string.length-1;				
+				while(string[i] == " " && i>-1){
+					i--;
+					endSpaces++;
+				}
+				
+				return string.substring(frontSpaces, string.length - endSpaces);
+			}
+			
+			
+			         
+		</script>
+	
+	</head>
+	<body>
+		url
+		<input type="text" id="string"/>
+	    <input type="button" onclick="urlify()" value="urlify" />
+	</body>
+</html>

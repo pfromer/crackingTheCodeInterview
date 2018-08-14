@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<script src="../jquery-3.3.1.min.js"></script>
+		<script src="../data structures/string builder.js"></script>
+		<script type="text/javascript">
+            function compress(){
+				var string = $("#string").val();
+				if(string == "")
+					return string;
+				
+				var lastCharacter = "";
+				var stringBuilder = new StringBuilder;
+				var currentCount = 0;
+				
+				for(var i = 0; i < string.length; i++){					
+					if(string[i] != lastCharacter && i!=0){
+						stringBuilder.append(lastCharacter);
+						stringBuilder.append(currentCount);
+						currentCount = 1;
+					}
+					else{
+						currentCount++;						
+					}
+					lastCharacter = string[i];				
+				}
+				stringBuilder.append(lastCharacter);
+				stringBuilder.append(currentCount);
+				var result = stringBuilder.toString();
+				console.log(result);
+				return result;
+			}
+		</script>	
+	</head>
+	<body>
+		string
+		<input type="text" id="string"/>
+	    <input type="button" onclick="compress()" value="compress" />
+	</body>
+</html>

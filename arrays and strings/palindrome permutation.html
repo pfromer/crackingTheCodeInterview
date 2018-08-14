@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<script src="../jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+            function isPalindromePermutation(){
+				var string = $("#string").val().toLowerCase();
+				
+				var dict = {};
+				
+				for(var i = 0; i<string.length; i++){									
+					if(string[i] != " "){
+						if(dict[string[i]]){
+							dict[string[i]]++
+						}
+						else{
+							dict[string[i]] = 1;
+						}				
+					}
+				}
+				
+				var odds = 0;				
+				$.each(Object.keys(dict), function(index, value){
+					if(dict[value] % 2 == 1)
+						odds ++;				
+				})
+				
+				result = odds == 0 || odds == 1;
+				console.log(result);
+				return result;
+			}        
+		</script>
+	
+	</head>
+	<body>
+		url
+		<input type="text" id="string"/>
+	    <input type="button" onclick="isPalindromePermutation()" value="is palindrome permutation" />
+	</body>
+</html>

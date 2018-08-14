@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<script src="jquery-3.3.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript">				
+			function process(){				
+				var word = $("#word").val();
+				var result = permutations(word, "");					
+			}
+			
+			function permutations(word, prefix){
+				if (word.length == 0)
+					console.log(prefix)
+				else{
+					for(var i=0; i<word.length; i++){
+						var rem = word.substring(0,i) + word.substring(i+1, word.length);
+						permutations(rem, prefix + word[i]);					
+					}	
+				}
+			}
+		
+		</script>
+	</head>
+	<body>
+		<input id="word" type="text"></input>
+		<button onclick="process()">Calcular Permutations</button>
+		<div id="resultDiv"></div>
+	</body>
+</html>

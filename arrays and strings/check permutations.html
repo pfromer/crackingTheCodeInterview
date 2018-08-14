@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<script src="../jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+            function checkPermutations(){
+				var word1 = $("#word1").val();
+				var word2 = $("#word2").val();
+				checkSameCharacters(word1, word2);
+			}	
+			
+			function checkSameCharacters(word1, word2){
+				var dict1 = dictOfCharactersCount(word1);
+				var dict2 = dictOfCharactersCount(word2);
+				var result = areEqual(dict1, dict2);
+				console.log(result);
+				return result;
+			}	
+			
+			function dictOfCharactersCount(word){			
+				var dict = {};
+				for(var i = 0; i<word.length; i++){				
+					if(dict[word[i]]){
+						dict[word[i]]++;						
+					}
+					else{
+						dict[word[i]]=1;
+					}
+				}
+				return dict;
+			}
+			
+			function areEqual(dict1, dict2){
+				var keys1 = Object.keys(dict1);
+				var keys2 = Object.keys(dict2);
+				
+				if(keys1.length != keys2.length)
+					return false;
+				
+				var result = true;
+				
+				$.each(keys1, function( index, value ) {
+				  if(dict1[value] != dict2[value])
+					result = false;
+				});	
+				return result;
+			}	
+			
+			
+			         
+		</script>
+	
+	</head>
+	<body>
+		Word 1
+		<input type="text" id="word1"/>
+		Word 2
+		<input type="text" id="word2"/>
+	    <input type="button" onclick="checkPermutations()" value="is permutation" />
+	</body>
+</html>
