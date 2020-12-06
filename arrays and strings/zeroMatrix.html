@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+
+
+
+        function zeroMatrix(matrix) {
+            var n = matrix.length;
+
+            logMatrix('---------------original------------');
+
+
+            if (n == 0 || matrix[0].length == 0) {
+                return;
+            }
+
+            var m = matrix[0].length;
+
+            function logMatrix(messsage) {
+                console.log(messsage)
+                for (var q = 0; q < n; q++) {
+                    var a = matrix[q].join();
+                    console.log(a);
+                }
+            }
+
+            function setColumnAndRowToZero(i, j) {
+                for (var k = 0; k < n; k++) {
+                    matrix[k][j] = 0;
+                }
+                for (var k = 0; k < m; k++) {
+                    matrix[i][k] = 0;
+                }
+            }
+
+            for (var i = 0; i < n; i++) {
+                for (var j = 0; j < m; j++) {
+                    if (matrix[i][j] == 0) {
+                        setColumnAndRowToZero(i, j);
+                        logMatrix('--------zero matriz-------');
+                        return;
+                    }
+
+                }
+            }
+        }
+
+
+
+
+
+
+    </script>
+
+</head>
+
+</html>
