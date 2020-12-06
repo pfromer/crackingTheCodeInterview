@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <script src="../jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+
+        function rotateMatrix(matrix) {
+            var n = matrix.length;
+
+            console.log('-------- original -------------')
+            for (var q = 0; q < n; q++) {
+                var a = matrix[q].join();
+                console.log(a);
+            }
+
+
+            var k = n;
+            var j = 0;
+
+            while (k - j > 1) {
+
+                var l = j;
+
+                var p1 = [j, j];
+                var p2 = [j, k - 1];
+                var p3 = [k - 1, k - 1];
+                var p4 = [k - 1, j];
+
+                while (l < k - 1) {
+
+                    var v1 = matrix[p1[0]][p1[1]];
+                    var v2 = matrix[p2[0]][p2[1]];
+                    var v3 = matrix[p3[0]][p3[1]];
+                    var v4 = matrix[p4[0]][p4[1]];
+
+                    matrix[p2[0]][p2[1]] = v1;
+                    matrix[p3[0]][p3[1]] = v2;
+                    matrix[p4[0]][p4[1]] = v3;
+                    matrix[p1[0]][p1[1]] = v4;
+
+                    p1 = moverDerecha(p1);
+                    p2 = moverAbajo(p2);
+                    p3 = moverIzquierda(p3);
+                    p4 = moverArriba(p4);
+
+                    l++;
+                }
+
+                k--;
+                j++;
+
+            }
+
+
+            console.log('-------- rotada -------------')
+            for (var q = 0; q < n; q++) {
+                var a = matrix[q].join();
+                console.log(a);
+            }
+        }
+
+
+        function moverDerecha(p) {
+            return [p[0], p[1] + 1];
+        }
+        function moverAbajo(p) {
+            return [p[0] + 1, p[1]];
+        }
+        function moverIzquierda(p) {
+            return [p[0], p[1] - 1];
+        }
+        function moverArriba(p) {
+            return [p[0] - 1, p[1]];
+        }
+
+        function diagonalDerechaAbajo(p) {
+            var p2 = moverDerecha(p);
+            return moverAbajo(p2);
+        }
+
+        function diagonalAbajoIzquierda(p) {
+            var p2 = moverIzquierda(p);
+            return moverAbajo(p2);
+        }
+
+        function diagonalArribaIzquierda(p) {
+            var p2 = moverIzquierda(p);
+            return moverArriba(p2);
+        }
+
+        function diagonalArribaDerecha(p) {
+            var p2 = moverArriba(p);
+            return moverDerecha(p2);
+        }
+
+
+
+    </script>
+
+</head>
+
+</html>
