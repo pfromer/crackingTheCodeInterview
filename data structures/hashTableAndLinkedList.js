@@ -59,8 +59,8 @@ String.prototype.hashCode = function () {
 
 
 function List() {
-    this.first = undefined;
-    this.last = undefined;
+    this.first = null;
+    this.last = null;
     this.size = 0;
 }
 
@@ -88,31 +88,33 @@ List.prototype.add = function (value) {
     this.size = this.size + 1;
 }
 
+
+
 List.prototype.get = function (ithElement) {
+
+    if (ithElement < 0 || ithElement > this.size - 1) {
+        return null;
+    }
 
     var result = this.first;
     var i = 0;
-    while (i < ithElement && result != undefined) {
+    while (i < ithElement && result != null) {
         result = result.next;
         i++;
     }
-    if (result == undefined) {
-        alert("there is no " + ithElement + "th element")
-    }
-    else {
-        return result.getValue();
-    }
+    return result.getValue();
+
 }
 
 List.prototype.getNode = function (ithElement) {
 
     var result = this.first;
     var i = 0;
-    while (i < ithElement && result != undefined) {
+    while (i < ithElement && result != null) {
         result = result.next;
         i++;
     }
-    if (result == undefined) {
+    if (result == null) {
         alert("there is no " + ithElement + "th element")
     }
     else {
@@ -126,8 +128,8 @@ List.prototype.remove = function (ithElement) {
     }
 
     if (ithElement == 0 && this.size == 1) {
-        this.first = undefined;
-        this.last = undefined;
+        this.first = null;
+        this.last = null;
         this.size--;
         return;
     }
@@ -149,10 +151,10 @@ List.prototype.remove = function (ithElement) {
 
     var ithNode = this.getNode(ithElement);
 
-    if (ithNode.getNext() != undefined) {
+    if (ithNode.getNext() != null) {
         previous.setNext(ithNode.getNext())
     } else {
-        previous.setNext(undefined);
+        previous.setNext(null);
         this.last = previous
     }
 
@@ -160,7 +162,7 @@ List.prototype.remove = function (ithElement) {
 
 function Node(value) {
     this.value = value;
-    this.next = undefined;
+    this.next = null;
 }
 
 Node.prototype.setNext = function (nextNode) {

@@ -30,18 +30,17 @@ List.prototype.add = function (value) {
 
 List.prototype.get = function (ithElement) {
 
+    if (ithElement < 0 || ithElement > this.size - 1) {
+        throw 'error';
+    }
+
     var result = this.first;
     var i = 0;
     while (i < ithElement && result != undefined) {
         result = result.next;
         i++;
     }
-    if (result == undefined) {
-        alert("there is no " + ithElement + "th element")
-    }
-    else {
-        return result.getValue();
-    }
+    return result.getValue();
 }
 
 List.prototype.getNode = function (ithElement) {

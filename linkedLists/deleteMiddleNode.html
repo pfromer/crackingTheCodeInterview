@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <script src="../data structures/doubleLinkedList.js"></script>
+    <script type="text/javascript">
+
+
+        function deleteMiddleNode(node) {
+            var previous = node.previous;
+            var next = node.next;
+            previous.next = next;
+            next.previous = previous;
+        }
+
+
+
+
+    </script>
+
+</head>
+
+</html>

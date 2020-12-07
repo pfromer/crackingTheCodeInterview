@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <script src="../data structures/doubleLinkedList.js"></script>
+    <script type="text/javascript">
+
+
+        function sumListsReverted(l1, l2) {
+
+            var i = 0;
+            var result = new DoubleLinkedList();
+            var currentL1 = l1.get(i);
+            var currentL2 = l2.get(i);
+            var carry = false;
+
+            while (currentL1 && currentL2) {
+                var sum = parseInt(currentL1) + parseInt(currentL2);
+                if (carry) {
+                    sum++;
+                }
+                if (sum > 9) {
+                    sum = sum - 10;
+                    carry = true;
+                } else {
+                    carry = false;
+                }
+                i++;
+                currentL1 = l1.get(i);
+                currentL2 = l2.get(i);
+                result.AddLast(sum);
+
+            }
+
+            const doMissingSum = (current, l) => {
+                while (current) {
+                    var sum = parseInt(current);
+                    if (carry) {
+                        sum++;
+                    }
+                    if (sum > 9) {
+                        sum = sum - 10;
+                        carry = true;
+                    } else {
+                        carry = false;
+                    }
+                    i++;
+                    current = l.get(i);
+                    result.AddLast(sum);
+                }
+            }
+
+            if (currentL1) {
+                doMissingSum(currentL1, l1);
+            }
+
+            if (currentL2) {
+                doMissingSum(currentL2, l2);
+            }
+
+            if (carry) {
+                result.AddLast('1');
+            }
+
+            return result;
+        }
+
+
+        function sumLists(l1, l2) {
+            return (sumListsReverted(l1.Reverse(), l2.Reverse())).Reverse();
+        }
+
+    </script>
+
+</head>
+
+</html>
