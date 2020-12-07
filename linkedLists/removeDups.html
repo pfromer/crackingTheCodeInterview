@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <script src="../data structures/hashTableAndLinkedList.js"></script>
+    <script type="text/javascript">
+
+
+        function removeDupsNoBuffer(linkedList) {
+
+            if (linkedList.size == 0) return;
+
+            var a = linkedList.first;
+            var i = 0;
+            while (a) {
+                var b = a.getNext();
+                var j = i + 1;
+                while (b) {
+                    if (b.getValue() == a.getValue()) {
+                        linkedList.remove(j);
+                    } else {
+                        j++;
+                    }
+                    b = b.getNext();
+
+                }
+                a = a.getNext();
+                i++;
+            }
+        }
+
+
+        function removeDups(linkedList) {
+
+            if (linkedList.size == 0) return;
+
+            var counts = new HashTable();
+
+            var current = linkedList.first;
+            while (current) {
+                if (counts.get(current.getValue())) {
+                    counts.set(current.getValue(), counts.get(current.getValue()) + 1);
+                } else {
+                    counts.set(current.getValue(), 1);
+                }
+                current = current.getNext();
+            }
+
+            var seen = new HashTable();
+            var current = linkedList.first;
+            var i = 0;
+            while (current) {
+                if (counts.get(current.getValue()) > 1) {
+                    if (seen.get(current.getValue())) {
+                        linkedList.remove(i);
+                    } else {
+                        i++;
+                        seen.set(current.getValue(), true);
+                    }
+                } else {
+                    i++;
+                }
+
+                current = current.getNext();
+            }
+        }
+
+
+
+
+    </script>
+
+</head>
+
+</html>
