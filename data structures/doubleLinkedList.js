@@ -95,6 +95,35 @@ DoubleLinkedList.prototype.show = function () {
     return a.join();
 }
 
+DoubleLinkedList.prototype.RemoveFirst = function () {
+    if (!this.first) {
+        throw ('linked list remove first, no first element')
+    }
+
+    if (this.first == this.last) {
+        this.first = null;
+        this.last = null;
+        return;
+    }
+
+    this.first = this.first.next;
+    this.first.previous = null;
+}
+
+DoubleLinkedList.prototype.RemoveLast = function () {
+    if (!this.last) {
+        throw ('linked list remove last, no last element')
+    }
+
+    if (this.first == this.last) {
+        this.first = null;
+        this.last = null;
+    }
+
+    this.last = this.last.previous;
+    this.last.next = null;
+}
+
 DoubleLinkedList.prototype.get = function (ithElement) {
 
     if (ithElement < 0) {
@@ -111,6 +140,9 @@ DoubleLinkedList.prototype.get = function (ithElement) {
         return result.value;
     }
     return null;
+}
 
+DoubleLinkedList.prototype.isEmpty = function () {
+    return this.first == null;
 }
 
