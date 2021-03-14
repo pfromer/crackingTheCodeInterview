@@ -4,11 +4,13 @@ function Stack() {
 }
 
 Stack.prototype.pop = function () {
-    if (!this.top()) {
-        throw ('stack pop exception, no top')
+    var top = this.top();
+    if (!top) {
+        return null;
     }
     this.list.RemoveFirst();
     this.size--;
+    return top;
 }
 
 Stack.prototype.push = function (value) {

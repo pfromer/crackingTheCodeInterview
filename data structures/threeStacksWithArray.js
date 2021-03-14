@@ -4,22 +4,25 @@ function ThreeStacksWithArray() {
 }
 
 ThreeStacksWithArray.prototype.pop = function () {
-    for (var i = this.stacks.length - 1; i > -1; i--) {
-        if (this.stacks[i].top()) {
-            return this.stacks[i].pop();
+    return this.forLoopReverse(function (stack) {
+        if (stack.top()) {
+            return stack.pop();
         }
-    }
-    throw ('three stacks pop error');
+    })
+}
+
+ThreeStacksWithArray.prototype.pop = function () {
+    return this.forLoopReverse((stack) => stack.top() ? stack.pop() : null)
 }
 
 ThreeStacksWithArray.prototype.push = function (value) {
-    for (var i = 0; i < this.stacks.length; i++) {
-        if (this.stacks[i].size < this.threshold) {
-            this.stacks[i].push(value);
-            return;
+    var self = this;
+    return this.forLoop(function (stack) {
+        if (stack.size < self.threshold) {
+            stack.push(value);
+            return true;
         }
-    }
-    throw ('stack full');
+    });
 }
 
 ThreeStacksWithArray.prototype.isEmpty = function () {
@@ -27,12 +30,7 @@ ThreeStacksWithArray.prototype.isEmpty = function () {
 }
 
 ThreeStacksWithArray.prototype.top = function () {
-    for (var i = this.stacks.length - 1; i > -1; i--) {
-        if (this.stacks[i].top()) {
-            return this.stacks[i].top();
-        }
-    };
-    throw ('three stacks top error');
+    return this.forLoopReverse((stack) => stack.top() ? stack.top() : null)
 }
 
 ThreeStacksWithArray.prototype.size = function () {
@@ -42,13 +40,19 @@ ThreeStacksWithArray.prototype.size = function () {
 
 ThreeStacksWithArray.prototype.forLoopReverse = function (f) {
     for (var i = this.stacks.length - 1; i > -1; i--) {
-        f(i);
+        var result = f(this.stacks[i]);
+        if (result) {
+            return result;
+        };
     };
 }
 
 ThreeStacksWithArray.prototype.forLoop = function (f) {
     for (var i = 0; i < this.stacks.length; i++) {
-        f(i);
+        var result = f(this.stacks[i]);
+        if (result) {
+            return result;
+        };
     };
 }
 

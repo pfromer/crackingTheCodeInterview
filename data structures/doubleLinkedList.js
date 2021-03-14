@@ -33,6 +33,51 @@ DoubleLinkedList.prototype.AddLast = function (value) {
     return node;
 }
 
+DoubleLinkedList.prototype.Get = function (comparor) {
+    var result = this.first;
+
+    while (result) {
+        if (comparor(result)) {
+            return result;
+        }
+        result = result.next;
+    }
+    return null;
+}
+
+DoubleLinkedList.prototype.Remove = function (comparor) {
+    var element = this.Get(comparor);
+
+    if (!element) {
+        return null;
+    }
+
+    if (element == this.first) {
+        if (this.first == this.last) {
+            this.first = null;
+            this.last = null;
+        } else {
+            this.first = this.first.next;
+            this.first.previous = null;
+        }
+        return element;
+    }
+
+    if (element == this.last) {
+        this.last = this.last.previous;
+        this.last.next = null;
+        return element;
+    }
+
+
+    var previous = element.previous;
+    var next = element.next;
+    previous.next = next;
+    next.previous = previous;
+
+    return element;
+}
+
 
 DoubleLinkedList.prototype.Reverse = function () {
     var result = new DoubleLinkedList();

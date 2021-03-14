@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <script src="../../data structures/graph.js"></script>
+    <script src="../../data structures/binarySearchTree.js"></script>
+    <script src="routeBetweenNodes.js"></script>
+    <script src="routeBetweenNodes.js"></script>
+    <script type="text/javascript">
+
+        const n = (value, children) => new GraphNode(value, children);
+        var last = n('l', []);
+        var first = n('first', [last]);
+        console.log(thereIsARouteBetweenNodes(first, last));
+        /*
+           a <----|
+           | \    |
+           b  c-->f
+          /
+         d
+         */
+
+        var d = n('d', []);
+        var b = n('b', [d]);
+        var a = n('a', [b]);
+        var f = n('f', [a]);
+        var c = n('c', [f]);
+        f.addChildren([a]);
+        a.addChildren([c]);
+        console.log(thereIsARouteBetweenNodes(a, f));
+        console.log(thereIsARouteBetweenNodes(b, c));
+
+        var binarySearchTree = buildTree([1, 2, 3, 4, 5, 6, 7, 8]);
+
+    </script>
+
+</head>
+
+</html>
